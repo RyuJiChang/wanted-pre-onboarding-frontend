@@ -12,7 +12,8 @@ import {
   SignSelectorR,
   SignSelectorWapper,
 } from "./styles";
-// import axios from "axios";
+import { ROUTE, URL } from "../../constants";
+import axios from "axios";
 
 function Home() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -22,6 +23,7 @@ function Home() {
     emailError: "이메일을 입력해주세요",
     passwordError: "비밀번호를 입력해주세요",
   });
+  // console.log(ROUTE, URL, URL.SIGNUP, URL.SIGNIN);
 
   function emailHandler(e) {
     let value = e.target.value;
@@ -72,8 +74,29 @@ function Home() {
   }
   function submitHandler(e) {
     e.preventDefault();
-    console.log(e);
+    postForm(isSignUp, formData.password, formData.email);
   }
+
+  function postForm(isSignUp, password, email) {
+    axios({
+      method: "post",
+      url: isSignUp ? URL.SIGNUP : URL.SIGNIN,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        email,
+        password,
+      },
+    })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <MainContainer>
       <SignSelectorWapper>
