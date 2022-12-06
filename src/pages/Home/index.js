@@ -19,23 +19,70 @@ function Home() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    emailError: "",
-    passwordError: "",
+    emailError: "이메일을 입력해주세요",
+    passwordError: "비밀번호를 입력해주세요",
   });
 
   function emailHandler(e) {
-    setFormData({ ...formData, email: e.target.value });
+    let value = e.target.value;
+    let regExp = /^([0-9a-zA-Z_.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    if (value.length === 0) {
+      setFormData({
+        ...formData,
+        email: value,
+        emailError: "이메일을 입력해주세요",
+      });
+    } else if (value.match(regExp) === null) {
+      setFormData({
+        ...formData,
+        email: value,
+        emailError: "이메일 형식이 맞지 않습니다.",
+      });
+    } else {
+      setFormData({
+        ...formData,
+        email: value,
+        emailError: "",
+      });
+    }
   }
 
   function passwordHandler(e) {
-    setFormData({ ...formData, password: e.target.value });
+    let value = e.target.value;
+    let regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+    if (value.length === 0) {
+      setFormData({
+        ...formData,
+        password: value,
+        passwordError: "비밀번호를 입력해주세요",
+      });
+    } else if (value.match(regExp) === null) {
+      setFormData({
+        ...formData,
+        password: value,
+        passwordError: "영문과 기호를 포함한 8~16글자로 만들어야 합니다.",
+      });
+    } else {
+      setFormData({
+        ...formData,
+        password: value,
+        passwordError: "",
+      });
+    }
   }
-
+  function submitHandler(e) {
+    e.preventDefault();
+    console.log(e);
+  }
   return (
     <MainContainer>
       <SignSelectorWapper>
-        <SignSelectorL>로그인</SignSelectorL>
-        <SignSelectorR>회원가입</SignSelectorR>
+        <SignSelectorL isSignUp={isSignUp} onClick={() => setIsSignUp(false)}>
+          로그인
+        </SignSelectorL>
+        <SignSelectorR isSignUp={isSignUp} onClick={() => setIsSignUp(true)}>
+          회원가입
+        </SignSelectorR>
       </SignSelectorWapper>
       <FormContainer
       // onSubmit={handleSubmit}
@@ -62,7 +109,11 @@ function Home() {
             />
             <Notice>{formData.passwordError}</Notice>
           </InputContainer>
-          <Button onClick={(e) => e.preventDefault()}>
+          <Button
+            disabled={!(formData.emailError === formData.passwordError)}
+            disabledCheck={formData.emailError === formData.passwordError}
+            onClick={submitHandler}
+          >
             {isSignUp ? "회원가입" : "로그인"}
           </Button>
         </Form>

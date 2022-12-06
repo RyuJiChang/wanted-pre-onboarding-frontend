@@ -35,16 +35,15 @@ const SignSelectorL = styled(SignSelector)`
   width: 157.5px;
   height: 50px;
   border-right: 1px solid #dfe0e1;
-
-  border-bottom: 1px solid #dfe0e1;
-  /* font-weight: bold; */
+  font-weight: ${(props) => (props.isSignUp ? "lighter" : "bold")};
+  border-bottom: ${(props) => (props.isSignUp ? "1px solid #dfe0e1" : "none")};
 `;
 
 /** 회원가입 스타일  */
 const SignSelectorR = styled(SignSelector)`
   border-bottom: 1px solid #dfe0e1;
-  font-weight: bold;
-  border-bottom: none;
+  font-weight: ${(props) => (props.isSignUp ? "bold" : "lighter")};
+  border-bottom: ${(props) => (props.isSignUp ? "none" : "1px solid #dfe0e1")};
 `;
 
 /** 폼 컨테이너 */
@@ -99,8 +98,8 @@ const Button = styled.button`
   height: 2.5em;
   padding: 10.4px;
   margin: 5px 2px;
-  background-color: black;
-  color: #ffffff;
+  background-color: ${(props) => (props.disabledCheck ? "black" : "gray")};
+  color: white;
   border-radius: 10px;
   border: none;
   font-size: 18px;
