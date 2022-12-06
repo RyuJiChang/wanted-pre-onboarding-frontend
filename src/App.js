@@ -1,8 +1,15 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ROUTE } from "./constants";
+import { Home, Todo } from "./pages";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">123</header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={ROUTE.HOME} element={<Home />} />
+        <Route path={ROUTE.TODO} element={<Todo />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
