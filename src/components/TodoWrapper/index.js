@@ -1,11 +1,19 @@
 import TodoList from "../TodoList";
 import TodoLists from "./styles";
 
-function TodoWrapper(listData) {
+function TodoWrapper(props) {
+  console.log(props.setIsChanged);
   return (
     <TodoLists>
-      {listData.listData.map((el) => {
-        return <TodoList key={el.id} props={el}></TodoList>;
+      {props.listData.map((el) => {
+        return (
+          <TodoList
+            key={el.id}
+            data={el}
+            isChanged={props.isChanged}
+            setIsChanged={props.setIsChanged}
+          ></TodoList>
+        );
       })}
     </TodoLists>
   );

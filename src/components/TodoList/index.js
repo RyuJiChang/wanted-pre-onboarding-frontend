@@ -3,20 +3,20 @@ import axios from "axios";
 import { URL } from "../../constants";
 import { TodoContainer, CheckBox, Memo, ButtonWrapper, Button } from "./styles";
 
-function TodoList(el) {
+function TodoList(props) {
   const [isModify, setIsModify] = useState(false);
-  const [value, setValue] = useState(el.props.todo);
-  const [checked, setChecked] = useState(el.props.isCompleted);
+  const [value, setValue] = useState(props.data.todo);
+  const [checked, setChecked] = useState(props.data.isCompleted);
   function checkHandler(e) {
     setChecked(e.target.checked);
-    setValue(el.props.todo);
+    setValue(props.data.todo);
     setIsModify(false);
     updateList("check");
   }
 
   function modifyHandler(e) {
     if (e.target.textContent === "취소") {
-      setValue(el.props.todo);
+      setValue(props.data.todo);
     } else if (e.target.textContent === "저장") {
       updateList("none");
     }
@@ -30,7 +30,7 @@ function TodoList(el) {
   function updateList(data) {
     axios({
       method: "put",
-      url: URL.TODOS + "/" + el.props.id,
+      url: URL.TODOS + "/" + props.data.id,
       headers: {
         Authorization: localStorage.getItem("localToken"),
         "Content-Type": "application/json",
@@ -39,25 +39,24 @@ function TodoList(el) {
         todo: value,
         isCompleted: data === "check" ? !checked : checked,
       },
-    }).then(function (response) {
-      // isChanged 값 변경으로 get 해오기
     });
   }
   function deleteList() {
     axios({
       method: "delete",
-      url: URL.TODOS + "/" + el.props.id,
+      url: URL.TODOS + "/" + props.data.id,
       headers: {
         Authorization: localStorage.getItem("localToken"),
       },
     }).then(function (response) {
+      props.setIsChanged(!props.isChanged);
       // isChanged 값 변경으로 get 해오기?  요거는 솔직히
       // 배열 컨트롤도 ㅣ되는데 그냥 isChanged 바꾸자
     });
   }
 
   return (
-    <TodoContainer key={el.props.id}>
+    <TodoContainer key={props.data.id}>
       <CheckBox type="checkbox" checked={checked} onChange={checkHandler} />
       <Memo disabled={!isModify} value={value} onChange={valueHandler} />
       {isModify ? (

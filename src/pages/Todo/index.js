@@ -12,10 +12,11 @@ import { TodoWrapper } from "../../components";
 function Todo() {
   // const navigate = useNavigate(); //로그아웃 구현 때 사용 예정
   const [listData, setListData] = useState(null);
+  const [isChanged, setIsChanged] = useState(true);
 
   useEffect(() => {
     getList();
-  }, []);
+  }, [isChanged]);
 
   function getList() {
     axios({
@@ -40,7 +41,11 @@ function Todo() {
       {!localStorage.getItem("localToken") && (
         <Navigate to={ROUTE.HOME}></Navigate>
       )}
-      <TodoWrapper listData={listData} />
+      <TodoWrapper
+        listData={listData}
+        setIsChanged={setIsChanged}
+        isChanged={isChanged}
+      />
       <MemoAdderContainer>
         <MemoAdderInput />
         <MemoAdderButton type="submit">등록</MemoAdderButton>
