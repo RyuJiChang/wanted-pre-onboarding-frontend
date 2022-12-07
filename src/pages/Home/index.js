@@ -1,3 +1,5 @@
+import axios from "axios";
+import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import {
   MainContainer,
@@ -13,7 +15,6 @@ import {
   SignSelectorWapper,
 } from "./styles";
 import { ROUTE, URL } from "../../constants";
-import axios from "axios";
 
 function Home() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -22,8 +23,7 @@ function Home() {
     password: "",
     emailError: "이메일을 입력해주세요",
     passwordError: "비밀번호를 입력해주세요",
-  });
-  // console.log(ROUTE, URL, URL.SIGNUP, URL.SIGNIN);
+  }); //4개의 값을 따로 관리하면 복잡하기 때문에 통합
 
   function emailHandler(e) {
     let value = e.target.value;
@@ -32,13 +32,13 @@ function Home() {
       setFormData({
         ...formData,
         email: value,
-        emailError: "이메일을 입력해주세요",
+        emailError: "이메일을 입력해주세요.",
       });
     } else if (value.match(regExp) === null) {
       setFormData({
         ...formData,
         email: value,
-        emailError: "이메일 형식이 맞지 않습니다.",
+        emailError: "올바른 이메일 형식이 아닙니다.",
       });
     } else {
       setFormData({
@@ -56,7 +56,7 @@ function Home() {
       setFormData({
         ...formData,
         password: value,
-        passwordError: "비밀번호를 입력해주세요",
+        passwordError: "비밀번호를 입력해주세요.",
       });
     } else if (value.match(regExp) === null) {
       setFormData({
@@ -80,7 +80,7 @@ function Home() {
   function postForm(isSignUp, password, email) {
     axios({
       method: "post",
-      url: isSignUp ? URL.SIGNUP : URL.SIGNIN,
+      url: isSignUp ? URL.SIGNUP : URL.SIGNIN, //재사용을 위한 URL 삼항연산자 처리
       headers: {
         "Content-Type": "application/json",
       },
@@ -90,7 +90,11 @@ function Home() {
       },
     })
       .then(function (response) {
-        console.log(response.data);
+        localStorage.setItem(
+          "localToken",
+          "Bearer " + response.data.access_token
+        );
+        return <Navigate to={ROUTE.TODO}></Navigate>;
       })
       .catch(function (error) {
         console.log(error);
