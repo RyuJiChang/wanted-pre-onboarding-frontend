@@ -10,15 +10,8 @@ import {
 } from "./styles";
 import { TodoWrapper } from "../../components";
 function Todo() {
-  const navigate = useNavigate(); //로그아웃 구현 때 사용 예정
-  const [listData, setListData] = useState([
-    {
-      id: 1,
-      todo: "과제하기",
-      isCompleted: false,
-      userId: 1,
-    },
-  ]);
+  // const navigate = useNavigate(); //로그아웃 구현 때 사용 예정
+  const [listData, setListData] = useState(null);
 
   useEffect(() => {
     getList();
@@ -42,7 +35,7 @@ function Todo() {
 
   function creatHandler() {}
 
-  return (
+  return listData ? (
     <MainContainer>
       {!localStorage.getItem("localToken") && (
         <Navigate to={ROUTE.HOME}></Navigate>
@@ -53,6 +46,8 @@ function Todo() {
         <MemoAdderButton type="submit">등록</MemoAdderButton>
       </MemoAdderContainer>
     </MainContainer>
+  ) : (
+    <div>loading</div>
   );
 }
 

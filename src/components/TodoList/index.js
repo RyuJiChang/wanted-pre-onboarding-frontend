@@ -4,28 +4,30 @@ import { URL } from "../../constants";
 import { TodoContainer, CheckBox, Memo, ButtonWrapper, Button } from "./styles";
 
 function TodoList(el) {
-  const [isModify, setisModify] = useState(false);
+  const [isModify, setIsModify] = useState(false);
   const [value, setValue] = useState(el.props.todo);
   const [checked, setChecked] = useState(el.props.isCompleted);
   function checkHandler(e) {
     setChecked(e.target.checked);
-    //api 호출예정
+    setValue(el.props.todo);
+    setIsModify(false);
+    updateList("check");
   }
 
   function modifyHandler(e) {
     if (e.target.textContent === "취소") {
       setValue(el.props.todo);
     } else if (e.target.textContent === "저장") {
-      updateList();
+      updateList("none");
     }
-    setisModify(!isModify);
+    setIsModify(!isModify);
   }
 
   function valueHandler(e) {
     setValue(e.target.value);
   }
 
-  function updateList() {
+  function updateList(data) {
     axios({
       method: "put",
       url: URL.TODOS + "/" + el.props.id,
@@ -35,7 +37,7 @@ function TodoList(el) {
       },
       data: {
         todo: value,
-        isCompleted: checked,
+        isCompleted: data === "check" ? !checked : checked,
       },
     }).then(function (response) {
       // isChanged 값 변경으로 get 해오기
@@ -56,7 +58,7 @@ function TodoList(el) {
 
   return (
     <TodoContainer key={el.props.id}>
-      <CheckBox type="checkbox" checked={checked} onClick={checkHandler} />
+      <CheckBox type="checkbox" checked={checked} onChange={checkHandler} />
       <Memo disabled={!isModify} value={value} onChange={valueHandler} />
       {isModify ? (
         <ButtonWrapper>
