@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { ROUTE, URL } from "../../constants";
 import {
   MainContainer,
   FormContainer,
@@ -14,7 +15,6 @@ import {
   SignSelectorR,
   SignSelectorWapper,
 } from "./styles";
-import { ROUTE, URL } from "../../constants";
 
 function Home() {
   const navigate = useNavigate();
