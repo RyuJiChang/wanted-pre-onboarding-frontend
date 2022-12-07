@@ -16,7 +16,7 @@ import {
   SignSelectorWapper,
 } from "./styles";
 
-function Home() {
+function Home({ setIsLogin }) {
   const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,6 +25,10 @@ function Home() {
     emailError: "이메일을 입력해주세요",
     passwordError: "비밀번호를 입력해주세요",
   });
+
+  function loginHandler() {
+    setIsLogin(true);
+  }
 
   function emailHandler(e) {
     let value = e.target.value;
@@ -94,6 +98,7 @@ function Home() {
         "localToken",
         "Bearer " + response.data.access_token
       );
+      loginHandler();
       navigate(ROUTE.TODO);
     });
   }

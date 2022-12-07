@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 /** 화면 구성용 메인 컨테이너 */
 const MainContainer = styled.div`
-  height: 100vh;
+  height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;
