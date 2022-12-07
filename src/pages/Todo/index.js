@@ -10,7 +10,7 @@ import {
 } from "./styles";
 import { TodoWrapper } from "../../components";
 function Todo() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //로그아웃 구현 때 사용 예정
   const [listData, setListData] = useState([
     {
       id: 1,
@@ -19,6 +19,10 @@ function Todo() {
       userId: 1,
     },
   ]);
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   function getList() {
     axios({
@@ -35,13 +39,8 @@ function Todo() {
         console.log(error);
       });
   }
-  useEffect(() => {
-    getList();
-  }, []);
 
-  function creatHandler(e) {
-    console.log(e);
-  }
+  function creatHandler() {}
 
   return (
     <MainContainer>

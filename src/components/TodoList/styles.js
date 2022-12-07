@@ -19,6 +19,9 @@ const Memo = styled.input`
   padding: 20px;
   border: none;
   border-radius: 5px;
+  :disabled {
+    background-color: rgba(59, 59, 59, 0.15);
+  }
 `;
 const ButtonWrapper = styled.div``;
 const Button = styled.button`
