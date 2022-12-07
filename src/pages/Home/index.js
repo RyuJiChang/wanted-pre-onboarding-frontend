@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   MainContainer,
@@ -17,6 +17,7 @@ import {
 import { ROUTE, URL } from "../../constants";
 
 function Home() {
+  const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -94,7 +95,7 @@ function Home() {
           "localToken",
           "Bearer " + response.data.access_token
         );
-        return <Navigate to={ROUTE.TODO}></Navigate>;
+        navigate(ROUTE.TODO);
       })
       .catch(function (error) {
         console.log(error);
@@ -103,6 +104,9 @@ function Home() {
 
   return (
     <MainContainer>
+      {localStorage.getItem("localToken") && (
+        <Navigate to={ROUTE.TODO}></Navigate>
+      )}
       <SignSelectorWapper>
         <SignSelectorL isSignUp={isSignUp} onClick={() => setIsSignUp(false)}>
           로그인
