@@ -22,8 +22,8 @@ const Button = styled.button`
   margin-left: 10px;
   border-radius: 5px;
 `;
-
-const MemoAdderContainer = styled.form`
+/** todo Create용 컨테이너 */
+const TodoAdderContainer = styled.form`
   width: 50vw;
   max-width: 800px;
   display: flex;
@@ -32,7 +32,8 @@ const MemoAdderContainer = styled.form`
   padding: 20px 0;
   background-color: #d9fff8;
 `;
-const MemoAdderInput = styled.input`
+/** todo Create용 input */
+const TodoAdderInput = styled.input`
   font-size: 25px;
   font-weight: bold;
   width: 80%;
@@ -41,7 +42,8 @@ const MemoAdderInput = styled.input`
   border: none;
   border-radius: 5px;
 `;
-const MemoAdderButton = styled(Button)`
+/** todo Create용 Button */
+const TodoAdderButton = styled(Button)`
   font-size: 20px;
   height: 50px;
   width: 60px;
@@ -50,7 +52,7 @@ const MemoAdderButton = styled(Button)`
 export {
   MainContainer,
   Button,
-  MemoAdderContainer,
-  MemoAdderInput,
-  MemoAdderButton,
+  TodoAdderContainer,
+  TodoAdderInput,
+  TodoAdderButton,
 };

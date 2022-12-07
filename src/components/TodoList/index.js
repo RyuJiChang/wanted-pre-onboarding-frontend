@@ -1,7 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { URL } from "../../constants";
-import { TodoContainer, CheckBox, Memo, ButtonWrapper, Button } from "./styles";
+import {
+  TodoContainer,
+  CheckBox,
+  TodoText,
+  ButtonWrapper,
+  Button,
+} from "./styles";
 
 function TodoList(props) {
   const [isModify, setIsModify] = useState(false);
@@ -58,7 +64,7 @@ function TodoList(props) {
   return (
     <TodoContainer key={props.data.id}>
       <CheckBox type="checkbox" checked={checked} onChange={checkHandler} />
-      <Memo disabled={!isModify} value={value} onChange={valueHandler} />
+      <TodoText disabled={!isModify} value={value} onChange={valueHandler} />
       {isModify ? (
         <ButtonWrapper>
           <Button disabled={checked} onClick={modifyHandler}>

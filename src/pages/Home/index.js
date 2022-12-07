@@ -24,7 +24,7 @@ function Home() {
     password: "",
     emailError: "이메일을 입력해주세요",
     passwordError: "비밀번호를 입력해주세요",
-  }); //4개의 값을 따로 관리하면 복잡하기 때문에 통합
+  });
 
   function emailHandler(e) {
     let value = e.target.value;
@@ -81,7 +81,7 @@ function Home() {
   function postForm(isSignUp, password, email) {
     axios({
       method: "post",
-      url: isSignUp ? URL.SIGNUP : URL.SIGNIN, //재사용을 위한 URL 삼항연산자 처리
+      url: isSignUp ? URL.SIGNUP : URL.SIGNIN,
       headers: {
         "Content-Type": "application/json",
       },
@@ -89,17 +89,13 @@ function Home() {
         email,
         password,
       },
-    })
-      .then(function (response) {
-        localStorage.setItem(
-          "localToken",
-          "Bearer " + response.data.access_token
-        );
-        navigate(ROUTE.TODO);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    }).then(function (response) {
+      localStorage.setItem(
+        "localToken",
+        "Bearer " + response.data.access_token
+      );
+      navigate(ROUTE.TODO);
+    });
   }
 
   return (

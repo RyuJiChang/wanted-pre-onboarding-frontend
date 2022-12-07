@@ -7,12 +7,14 @@ const TodoContainer = styled.div`
   padding: 10px 0;
 `;
 
+/** todo 달성여부 체크용 */
 const CheckBox = styled.input`
   display: flex;
   align-items: center;
 `;
 
-const Memo = styled.input`
+/** Todo 출력 및 수정용 input */
+const TodoText = styled.input`
   font-size: 25px;
   font-weight: bold;
   width: 80%;
@@ -24,6 +26,7 @@ const Memo = styled.input`
   }
 `;
 const ButtonWrapper = styled.div``;
+
 const Button = styled.button`
   display: flex;
   align-items: center;
@@ -37,4 +40,4 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 
-export { TodoContainer, CheckBox, Memo, ButtonWrapper, Button };
+export { TodoContainer, CheckBox, TodoText, ButtonWrapper, Button };
