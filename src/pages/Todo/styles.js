@@ -10,15 +10,6 @@ const MainContainer = styled.div`
   background-color: #e9ecef87;
 `;
 
-/** Todo wrapper.. 더 할말이 없다. */
-const TodoWrapper = styled.div`
-  background-color: #d9fff8;
-  height: 80vh;
-  width: 50vw;
-  max-width: 800px;
-  overflow-y: auto;
-`;
-
 const Button = styled.button`
   display: flex;
   align-items: center;
@@ -58,7 +49,6 @@ const MemoAdderButton = styled(Button)`
 
 export {
   MainContainer,
-  TodoWrapper,
   Button,
   MemoAdderContainer,
   MemoAdderInput,

@@ -4,12 +4,11 @@ import { useState, useEffect } from "react";
 import { ROUTE, URL } from "../../constants";
 import {
   MainContainer,
-  TodoWrapper,
   MemoAdderContainer,
   MemoAdderInput,
   MemoAdderButton,
 } from "./styles";
-import { TodoList } from "../../components";
+import { TodoWrapper } from "../../components";
 function Todo() {
   const navigate = useNavigate();
   const [listData, setListData] = useState([
@@ -49,11 +48,7 @@ function Todo() {
       {!localStorage.getItem("localToken") && (
         <Navigate to={ROUTE.HOME}></Navigate>
       )}
-      <TodoWrapper>
-        {listData.map((el) => {
-          return <TodoList props={el}></TodoList>;
-        })}
-      </TodoWrapper>
+      <TodoWrapper listData={listData} />
       <MemoAdderContainer>
         <MemoAdderInput />
         <MemoAdderButton type="submit">등록</MemoAdderButton>
