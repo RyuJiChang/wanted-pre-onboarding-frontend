@@ -5,23 +5,21 @@ import { ROUTE, URL } from "../../constants";
 import {
   MainContainer,
   TodoWrapper,
-  TodoContainer,
-  CheckBox,
-  Memo,
-  ButtonWrapper,
-  Button,
   MemoAdderContainer,
   MemoAdderInput,
   MemoAdderButton,
 } from "./styles";
+import { TodoList } from "../../components";
 function Todo() {
   const navigate = useNavigate();
-  const [listData, setListData] = useState({
-    id: 1,
-    todo: "과제하기",
-    isCompleted: false,
-    userId: 1,
-  });
+  const [listData, setListData] = useState([
+    {
+      id: 1,
+      todo: "과제하기",
+      isCompleted: false,
+      userId: 1,
+    },
+  ]);
 
   function getList() {
     axios({
@@ -53,16 +51,7 @@ function Todo() {
       )}
       <TodoWrapper>
         {listData.map((el) => {
-          return (
-            <TodoContainer key={el.id}>
-              <CheckBox type="checkbox" checked={el.isCompleted} />
-              <Memo value={el.todo} />
-              <ButtonWrapper>
-                <Button>수정</Button>
-                <Button>삭제</Button>
-              </ButtonWrapper>
-            </TodoContainer>
-          );
+          return <TodoList props={el}></TodoList>;
         })}
       </TodoWrapper>
       <MemoAdderContainer>

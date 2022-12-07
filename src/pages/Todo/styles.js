@@ -10,6 +10,7 @@ const MainContainer = styled.div`
   background-color: #e9ecef87;
 `;
 
+/** Todo wrapper.. 더 할말이 없다. */
 const TodoWrapper = styled.div`
   background-color: #d9fff8;
   height: 80vh;
@@ -18,27 +19,6 @@ const TodoWrapper = styled.div`
   overflow-y: auto;
 `;
 
-const TodoContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 0;
-`;
-
-const CheckBox = styled.input`
-  display: flex;
-  align-items: center;
-`;
-
-const Memo = styled.input`
-  font-size: 25px;
-  font-weight: bold;
-  width: 80%;
-  padding: 20px;
-  border: none;
-  border-radius: 5px;
-`;
-const ButtonWrapper = styled.div``;
 const Button = styled.button`
   display: flex;
   align-items: center;
@@ -51,6 +31,7 @@ const Button = styled.button`
   margin-left: 10px;
   border-radius: 5px;
 `;
+
 const MemoAdderContainer = styled.div`
   width: 50vw;
   max-width: 800px;
@@ -78,10 +59,6 @@ const MemoAdderButton = styled(Button)`
 export {
   MainContainer,
   TodoWrapper,
-  TodoContainer,
-  CheckBox,
-  Memo,
-  ButtonWrapper,
   Button,
   MemoAdderContainer,
   MemoAdderInput,
