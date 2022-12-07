@@ -51,7 +51,7 @@ const Button = styled.button`
   margin-left: 10px;
   border-radius: 5px;
 `;
-const TodoAdderContainer = styled.div`
+const MemoAdderContainer = styled.div`
   width: 50vw;
   max-width: 800px;
   display: flex;
@@ -65,6 +65,7 @@ const MemoAdderInput = styled.input`
   font-weight: bold;
   width: 80%;
   padding: 20px;
+  margin-left: 20px;
   border: none;
   border-radius: 5px;
 `;
@@ -82,7 +83,7 @@ export {
   Memo,
   ButtonWrapper,
   Button,
-  TodoAdderContainer,
+  MemoAdderContainer,
   MemoAdderInput,
   MemoAdderButton,
 };

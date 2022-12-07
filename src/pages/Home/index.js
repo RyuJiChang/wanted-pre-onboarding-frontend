@@ -115,9 +115,7 @@ function Home() {
           회원가입
         </SignSelectorR>
       </SignSelectorWapper>
-      <FormContainer
-      // onSubmit={handleSubmit}
-      >
+      <FormContainer>
         <Form>
           <InputContainer>
             <Label className="input-text">Email</Label>

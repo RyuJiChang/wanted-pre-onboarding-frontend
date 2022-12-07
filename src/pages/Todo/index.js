@@ -10,99 +10,65 @@ import {
   Memo,
   ButtonWrapper,
   Button,
-  TodoAdderContainer,
+  MemoAdderContainer,
   MemoAdderInput,
   MemoAdderButton,
 } from "./styles";
 function Todo() {
   const navigate = useNavigate();
-  const [addMemo, setAddMemo] = useState("");
+  const [listData, setListData] = useState({
+    id: 1,
+    todo: "과제하기",
+    isCompleted: false,
+    userId: 1,
+  });
+
+  function getList() {
+    axios({
+      method: "get",
+      url: URL.TODOS,
+      headers: {
+        Authorization: localStorage.getItem("localToken"),
+      },
+    })
+      .then(function (response) {
+        setListData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   useEffect(() => {
-    console.log(1);
+    getList();
   }, []);
+
+  function creatHandler(e) {
+    console.log(e);
+  }
+
   return (
     <MainContainer>
       {!localStorage.getItem("localToken") && (
         <Navigate to={ROUTE.HOME}></Navigate>
       )}
       <TodoWrapper>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
-        <TodoContainer>
-          <CheckBox type="checkbox" checked={false} />
-          <Memo value={"12312312123131aa212312asdas"} />
-          <ButtonWrapper>
-            <Button>수정</Button>
-            <Button>삭제</Button>
-          </ButtonWrapper>
-        </TodoContainer>
+        {listData.map((el) => {
+          return (
+            <TodoContainer key={el.id}>
+              <CheckBox type="checkbox" checked={el.isCompleted} />
+              <Memo value={el.todo} />
+              <ButtonWrapper>
+                <Button>수정</Button>
+                <Button>삭제</Button>
+              </ButtonWrapper>
+            </TodoContainer>
+          );
+        })}
       </TodoWrapper>
-      <TodoAdderContainer>
-        <MemoAdderInput value={addMemo} />
-        <MemoAdderButton>등록</MemoAdderButton>
-      </TodoAdderContainer>
+      <MemoAdderContainer>
+        <MemoAdderInput />
+        <MemoAdderButton type="submit">등록</MemoAdderButton>
+      </MemoAdderContainer>
     </MainContainer>
   );
 }
