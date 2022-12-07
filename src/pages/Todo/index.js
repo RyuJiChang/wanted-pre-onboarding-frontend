@@ -34,7 +34,23 @@ function Todo() {
       });
   }
 
-  function creatHandler() {}
+  function creatHandler(e) {
+    e.preventDefault();
+    axios({
+      method: "post",
+      url: URL.TODOS,
+      headers: {
+        Authorization: localStorage.getItem("localToken"),
+        "Content-Type": "application/json",
+      },
+      data: {
+        todo: e.target[0].value,
+      },
+    }).then(function (response) {
+      setIsChanged(!isChanged);
+      e.target[0].value = "";
+    });
+  }
 
   return listData ? (
     <MainContainer>
@@ -46,9 +62,9 @@ function Todo() {
         setIsChanged={setIsChanged}
         isChanged={isChanged}
       />
-      <MemoAdderContainer>
+      <MemoAdderContainer onSubmit={creatHandler}>
         <MemoAdderInput />
-        <MemoAdderButton type="submit">등록</MemoAdderButton>
+        <MemoAdderButton>등록</MemoAdderButton>
       </MemoAdderContainer>
     </MainContainer>
   ) : (

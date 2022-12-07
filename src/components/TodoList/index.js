@@ -39,6 +39,8 @@ function TodoList(props) {
         todo: value,
         isCompleted: data === "check" ? !checked : checked,
       },
+    }).then(function (response) {
+      props.setIsChanged(!props.isChanged);
     });
   }
   function deleteList() {
@@ -50,8 +52,6 @@ function TodoList(props) {
       },
     }).then(function (response) {
       props.setIsChanged(!props.isChanged);
-      // isChanged 값 변경으로 get 해오기?  요거는 솔직히
-      // 배열 컨트롤도 ㅣ되는데 그냥 isChanged 바꾸자
     });
   }
 

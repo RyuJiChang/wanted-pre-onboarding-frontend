@@ -23,7 +23,7 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 
-const MemoAdderContainer = styled.div`
+const MemoAdderContainer = styled.form`
   width: 50vw;
   max-width: 800px;
   display: flex;
