@@ -63,7 +63,12 @@ function Todo() {
       </TodoAdderContainer>
     </MainContainer>
   ) : (
-    <div>loading...</div>
+    <div>
+      {!localStorage.getItem("localToken") && (
+        <Navigate to={ROUTE.HOME}></Navigate>
+      )}
+      loading...
+    </div>
   );
 }
 
