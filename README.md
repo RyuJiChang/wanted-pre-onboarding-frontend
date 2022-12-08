@@ -4,4 +4,7 @@
  3.npm start 또는 npm run start를 통해 프로젝트 실행<br>
  4.http://localhost:3000 페이지 접속(3000번 포트가 기본이지만 사용중일 경우 터미널에 안내되는 포트번호 기입)<br>
 <br>
-<strong>-배포 링크 및 gif(예정)</strong>
+<strong>-배포 링크 및 gif</strong><br>
+https://ryujichang-wanted-pre-onboarding.netlify.app/todo
+<br>
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/104156381/206126007-f5f2fecb-159e-4741-8395-831952ed5ab6.gif)
